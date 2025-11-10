@@ -26,12 +26,14 @@ public class StudentApartment {
     private String phoneNumber;
 
 
+    // Constructor without Parameter
     public StudentApartment() {
         this.name = "NAME";
         this.studentID = "000000000000";
         this.phoneNumber = "00000000000";
     }
 
+    // Constructor with Parameters
     public StudentApartment(String name, String studentID, String phoneNumber) {
         setName(name);
         setStudentID(studentID);

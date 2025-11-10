@@ -1,4 +1,8 @@
 /**
+ * Update
+ * 1. Add the sort option to the menu.
+ * 2. Add some annotations to describe purposes.
+
  * Points to Note
  * 1. Check-out Application: It is necessary to check that there are successfully completed accommodation applications before processing the check-out application.
  * 2. Accommodation Transfer Application: It is necessary to check whether there are successfully completed accommodation applications and unsuccessful check-out applications.
@@ -21,7 +25,7 @@ public class Driver {
     public static void main(String[] args) {
 
         System.out.println("--------------------------------------");
-        System.out.println(" Student Apartment System Version 2.0 ");
+        System.out.println(" Student Apartment System Version 2.5 ");
         System.out.println("--------------------------------------\n");
 
         Driver driver = new Driver();
@@ -43,10 +47,10 @@ public class Driver {
             flag = false;
         }
         return flag;
-    }
+    } // End of JudgeName
 
 
-    // Validation for studentID
+    // Validation for studentID (whether all of which is number and have 12 elements)
     public boolean judgeID(String studentID) {
         boolean flag = true;
         if (studentID.length() != 12) {
@@ -58,7 +62,7 @@ public class Driver {
             flag = false;
         }
         return flag;
-    }
+    } // End of JudgeID
 
 
     // Validation for Phone Number
@@ -73,7 +77,7 @@ public class Driver {
             flag = false;
         }
         return flag;
-    }
+    } // End of JudgePhoneNumber
 
 
     // Validation of studentID
@@ -90,7 +94,7 @@ public class Driver {
             }
             return id;
         }
-    }
+    } // End of ReadUniqueStudentID
 
 
     public void addAndStart() {
@@ -113,28 +117,26 @@ public class Driver {
         String studentID = readUniqueStudentID(input, studentStore);
 
         // The first version of studentID's validation.
-        /*
-        String studentID = input.nextLine();
-        boolean flag = true;
-        for (int i = 0; i < studentStore.size(); i++) {
-            if (studentStore.get(i).getStudentID().equals(studentID)) {
-                flag = false;
-                break;
-            }
-        }
-        while (!(judgeID(studentID)) || !flag) {
-            System.out.print("\033[33m[Please enter a valid student ID]   \033[0m");
-            studentID = input.nextLine();
-            flag = true;
-            for (int i = 0; i < studentStore.size(); i++) {
-                if (studentStore.get(i).getStudentID().equals(studentID)) {
-                    flag = false;
-                    break;
-                }
-            }
-
-        }
-         */
+//        String studentID = input.nextLine();
+//        boolean flag = true;
+//        for (int i = 0; i < studentStore.size(); i++) {
+//            if (studentStore.get(i).getStudentID().equals(studentID)) {
+//                flag = false;
+//                break;
+//            }
+//        }
+//        while (!(judgeID(studentID)) || !flag) {
+//            System.out.print("\033[33m[Please enter a valid student ID]   \033[0m");
+//            studentID = input.nextLine();
+//            flag = true;
+//            for (int i = 0; i < studentStore.size(); i++) {
+//                if (studentStore.get(i).getStudentID().equals(studentID)) {
+//                    flag = false;
+//                    break;
+//                }
+//            }
+//
+//        }
 
         // input and validate phone number
         System.out.print("\033[33m[Enter phone number] \033[0m");
@@ -178,11 +180,7 @@ public class Driver {
         }
 
 
-    }
-
-
-    // "\033[31m这是红色文字\033[0m"
-    // "\033[34m<You have not been added to the student list yet!>\033[0m"
+    } // End of AddAndStart
 
 
     public void startIterm() {
@@ -223,7 +221,8 @@ public class Driver {
         if  (!flag) {
             System.out.println("\033[32m<You have not been added to the student list yet!>\033[0m");
         }
-    }
+
+    } // End of StartIterm
 
 
     public void updateStatus() {
@@ -297,7 +296,7 @@ public class Driver {
         }
 
 
-    }
+    } // End of UpdateStatus
 
 
     public void displayPersonalProject() {
@@ -325,10 +324,10 @@ public class Driver {
             System.out.println("\033[36m<Student ID does not exist!>\033[0m");
         }
 
-    }
+    } // End of DisplayPersonalProject
 
 
-    public void displayAllProject() {
+    public void displayAllProjects() {
 
         System.out.println("\033[94m\n---------------------\033[0m");
         System.out.println("\033[94m Display All Project \033[0m");
@@ -338,7 +337,29 @@ public class Driver {
             System.out.println(studentStore.get(i));
         }
 
-    }
+    } // End of DisplayAllProjects
+
+
+    // Sort in Ascending Order by StudentID
+    public void sortStudentID() {
+
+        int min;
+        for (int i = 0; i < studentStore.size() - 1; i++) {
+            min = i;
+            for (int j = i + 1; j < studentStore.size(); j++) {
+                if (Long.parseLong(studentStore.get(j).getStudentID()) < Long.parseLong(studentStore.get(min).getStudentID())) {
+                    min = j;
+                }
+            }
+            if (min != i) {
+                StudentApartment temp = studentStore.get(min);
+                studentStore.set(min, studentStore.get(i));
+                studentStore.set(i,temp);
+            }
+        }
+        displayAllProjects();
+
+    } // End of sortStudentID
 
 
     public void accommodationNotice() {
@@ -369,7 +390,9 @@ public class Driver {
                 3) Update Iterm Status
                 4) Display Your Projects
                 5) Display Everyone's Projects
-                6) Accommodation Notice\033[0m
+                6) Accommodation Notice
+                7) Sort StudentsID and Display Everyone's Projects
+                <Before you choose other option, you should add a student at first (Option 1).>\033[0m
                 """);
         System.out.print("\033[34m[Enter the number of option to handle] \033[0m");
         int getOperationNumber = input.nextInt();
@@ -387,8 +410,9 @@ public class Driver {
                 case 2  ->  startIterm();
                 case 3  ->  updateStatus();
                 case 4  ->  displayPersonalProject();
-                case 5  ->  displayAllProject();
+                case 5  ->  displayAllProjects();
                 case 6  ->  accommodationNotice();
+                case 7  ->  sortStudentID();
                 default ->  System.out.println("\033[34m<Invalid option. Try again.>\033[0m");
             }
             System.out.println("\033[34m\n<Press Enter to continue...>\033[0m");
