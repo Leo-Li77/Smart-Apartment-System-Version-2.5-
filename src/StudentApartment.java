@@ -51,7 +51,7 @@ public class StudentApartment {
     }
 
 
-    // Validation for Phone Number
+    // Validation for studentID (whether all of which is number and have 12 elements)
     private boolean judgeID(String studentID) {
         boolean flag = true;
         if (studentID.length() != 12) {
@@ -66,7 +66,7 @@ public class StudentApartment {
     }
 
 
-    // Validation for Phone Number
+    // Validation for Phone Number (whether all of which is number and have 11 elements)
     private boolean judgePhoneNumber(String telephoneNumber) {
         boolean flag = true;
         if (telephoneNumber.length() != 11) {

@@ -41,7 +41,7 @@ public class Driver {
 
 
     // Validation for Name
-    public boolean judgeName(String name) {
+    private boolean judgeName(String name) {
         boolean flag = true;
         if (name.length() < 2 || name.trim().isEmpty()) {
             flag = false;
@@ -50,8 +50,8 @@ public class Driver {
     } // End of JudgeName
 
 
-    // Validation for studentID (whether all of which is number and have 12 elements)
-    public boolean judgeID(String studentID) {
+    // Validation1 for studentID (To see whether all of which is number and have 12 elements)
+    private boolean judgeID(String studentID) {
         boolean flag = true;
         if (studentID.length() != 12) {
             flag = false;
@@ -66,7 +66,7 @@ public class Driver {
 
 
     // Validation for Phone Number
-    public boolean judgePhoneNumber(String telephoneNumber) {
+    private boolean judgePhoneNumber(String telephoneNumber) {
         boolean flag = true;
         if (telephoneNumber.length() != 11) {
             flag = false;
@@ -80,7 +80,7 @@ public class Driver {
     } // End of JudgePhoneNumber
 
 
-    // Validation of studentID
+    // Validation2 of studentID (To see whether there has a student has the same studentID as the new added one.)
     private String readUniqueStudentID(Scanner input, List<StudentApartment> store) {
         while (true) {
             String id = input.nextLine();
@@ -97,7 +97,7 @@ public class Driver {
     } // End of ReadUniqueStudentID
 
 
-    public void addAndStart() {
+    private void addAndStart() {
 
         System.out.println("\033[33m\n---------------\033[0m");
         System.out.println("\033[33m Start Project \033[0m");
